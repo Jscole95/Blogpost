@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: rR2rifa91UV35DV0MHt11rbbfAj90BpN6DnlX/9KzFbkP1P+hr0W7PzUNO2ZzzmGJiufZugH8npae2tGBm0UO5tU98AXtcK/mqFbXQbn2AHd7kej0GV6IQSwAb9FtZpglNt1+XkXDWTFWSMKc+b1mM4+DzMAius6tBoO1ZxMOszAcvBF5GlKD8xOKZ4LiSdJOEbMDe/pMMNxTflfvGR7K1hwfxTUE14baO/nC1GzysxF6oXDQZkip0akT2kNRuONzm9ggfDOc91fjK4x0Iuv2chOvI9Lffm9wm2AMMQ+BkIvnP25arTCD2AAfnWkEPHZL+8NZTW9nNQcYgYwj0BTAp/13/0XibQurNg+rkZowAxIopCjGbQBusM2qQ6R+FhTnnJay9p98TNWn26Xw3n6of41PeTb6gBgEm5mzGhLBDSe9OBtwXWOAj/I6tGFUlWaiJ1sifPEiWKEQWPsH1SfQHqiXEENZbtCM6jgm+cSLDuUqBquNmexaAq3o6WKZrO92UhRma8AREWPP/1dLVwRIY2azz7iLYYlfZ9GikXz5R9tX7pyebHA1uSjm4GwS9vrS22BcjTrdZ0rlxV7O+SEYf6KU67Fz5xFJUJSA1U+GkQkj3BRHSVwT4bMAuDBb+b+mPK9Oie9giO5ThbQvTP4a9zsIugq6Oda4ERl6dxnSys=
+  app: vast-tundra-18588
+  on:
+    repo: Jscole95/Blogpost
