@@ -12,6 +12,32 @@ app.use(morgan('common'));
 
 BlogPosts.create('Test Title', 'Test Content', 'Test Author', 'Test Date');
 
+function runServer() {
+  const port = process.env.PORT || 8080;
+  return new Promise((resolve, reject) => {
+    server = app.listen(port, () => {
+      console.log(`Your app is listening on port ${port}`);
+      resolve(server);
+    }).on('error', err => {
+      reject(err)
+    });
+  });
+}
+
+function closeServer() {
+  return new Promise((resolve, reject) => {
+    console.log('Closing server');
+    server.close(err => {
+      if (err) {
+        reject(err);
+        // so we don't also call `resolve()`
+        return;
+      }
+      resolve();
+    });
+  });
+}
+
 app.get('/blog-posts', (req, res) => {
 	res.status(200).json(BlogPosts.get());
 });
@@ -47,21 +73,21 @@ app.put('/blog-posts/:id', jsonParser, (req, res) => {
 	if (req.params.id != req.body.id)
 		res.status(401).send(`Parameter id and body id do not match`);
 	else if (test === true){
-		BlogPosts.update({
+		const newBlog = BlogPosts.update({
 			id: req.body.id,
 			title: req.body.title,
 			content: req.body.content,
 			author: req.body.author,
 			date: getDate()
 		});
-		res.status(204).end();
+		res.status(201).json(newBlog);
 	}
 	else res.status(401).send(`Missing ${test} in request body`);
 });
 
-app.listen(process.env.PORT || 8080, () => {
-	console.log(`Listening on port ${process.env.PORT || 8080}`);
-});
+//app.listen(process.env.PORT || 8080, () => {
+//	console.log(`Listening on port ${process.env.PORT || 8080}`);
+//});
 
 function inBody(req, fields){
 	console.log('hello');
@@ -88,3 +114,5 @@ function getDate(){
 		time += (today.getHours()) + minutes + 'am';
 	return date + time;
 }
+
+module.exports = {app, runServer, closeServer, getDate};
